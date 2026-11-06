@@ -1,0 +1,509 @@
+<title>For Madam ji</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Jost:wght@300;400;500&family=Noto+Serif+Devanagari:wght@400;500&display=swap">
+<style>
+/* Layout concept: one slow scroll from night to dawn. Hero with a self-drawing heart, a letter,
+   a real timeline from first light to "always", vows, then the question. Petals and stars live on a fixed canvas. */
+:root{
+  --night:#13050f;
+  --plum:#2a0b24;
+  --wine:#52132f;
+  --rose:#ff7a9c;
+  --blush:#ffd9e2;
+  --gold:#f2c98a;
+  --ink:#fbeef2;
+  --soft:#dfc3cd;
+  --line:rgba(255,214,223,.2);
+  --display:'Pinyon Script','Snell Roundhand','Brush Script MT',cursive;
+  --body:'Newsreader',Georgia,'Times New Roman',serif;
+  --ui:'Jost',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --deva:'Noto Serif Devanagari','Noto Serif',serif;
+  --p:0;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--night);color:var(--ink);
+  font:400 1.125rem/1.7 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  overflow-x:clip;-webkit-font-smoothing:antialiased;
+}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+/* fixed atmosphere */
+.sky,.dawn,#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+.sky{z-index:0;background:
+  radial-gradient(80% 55% at 18% 0%,#3d0f35 0%,transparent 62%),
+  radial-gradient(70% 55% at 92% 35%,rgba(122,26,70,.42),transparent 62%),
+  linear-gradient(180deg,#13050f 0%,#1d0819 55%,#2a0b24 100%)}
+.dawn{z-index:0;opacity:calc(var(--p)*.9);background:
+  radial-gradient(130% 55% at 50% 112%,rgba(255,146,120,.55),rgba(194,48,95,.28) 45%,transparent 72%)}
+#fx{z-index:1}
+main{position:relative;z-index:2;max-width:72rem;margin-inline:auto}
+
+/* music control */
+.music{
+  position:fixed;z-index:5;
+  top:calc(12px + env(safe-area-inset-top,0px));
+  right:max(16px,env(safe-area-inset-right,0px));
+  display:inline-flex;align-items:center;gap:.55rem;min-height:44px;padding:0 1rem;
+  font:500 .72rem/1 var(--ui);letter-spacing:.16em;text-transform:uppercase;color:var(--blush);
+  background:rgba(42,11,36,.62);border:1px solid var(--line);border-radius:999px;
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);cursor:pointer;
+}
+.music svg{width:16px;height:16px}
+.music .bars{display:inline-flex;gap:2px;align-items:flex-end;height:14px}
+.music .bars i{width:2px;height:4px;background:var(--rose);border-radius:2px}
+.music[aria-pressed="true"] .bars i{animation:eq 1s ease-in-out infinite}
+.music[aria-pressed="true"] .bars i:nth-child(2){animation-delay:.2s}
+.music[aria-pressed="true"] .bars i:nth-child(3){animation-delay:.4s}
+@keyframes eq{0%,100%{height:3px}50%{height:14px}}
+
+/* shared type */
+.eyebrow{margin:0 0 1rem;font:500 .74rem/1.4 var(--ui);letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.script{font-family:var(--display);font-weight:400;line-height:1.05;margin:0;text-wrap:balance;
+  text-shadow:0 0 34px rgba(255,122,156,.28)}
+.deva{font-family:var(--deva);color:var(--gold);font-weight:400}
+section,header{padding-block:clamp(3.5rem,9vw,7rem)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:center;gap:clamp(1.5rem,5vw,4rem);
+  padding-top:clamp(5.5rem,12vw,8rem)}
+.title{margin:0 0 1.2rem;font-family:var(--display);font-weight:400;font-size:clamp(3.4rem,12vw,7.6rem);line-height:1.02;
+  background:linear-gradient(100deg,#ffe3ea 0%,var(--rose) 55%,var(--gold) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 26px rgba(255,122,156,.3))}
+.title .line{display:block;padding:.05em .12em .12em 0;animation:write 1.9s cubic-bezier(.5,.1,.2,1) var(--d,0s) both}
+@keyframes write{from{clip-path:inset(-20% 100% -25% -5%)}to{clip-path:inset(-20% -12% -25% -5%)}}
+.hero .deva{font-size:clamp(1.35rem,3.6vw,1.9rem);margin:0 0 1.1rem;animation:fade 1.6s 2.4s both}
+.lede{margin:0 0 2rem;max-width:30rem;color:var(--soft);font-size:1.2rem;animation:fade 1.6s 2.8s both}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.cue{display:inline-flex;align-items:center;gap:.7rem;font:500 .74rem/1 var(--ui);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--blush);text-decoration:none;min-height:44px;animation:fade 1.6s 3.2s both}
+.cue svg{width:18px;height:18px;animation:nudge 1.8s ease-in-out infinite}
+@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+.heart-btn{justify-self:center;width:min(100%,24rem);aspect-ratio:1/.92;padding:0;border:0;background:none;cursor:pointer;position:relative}
+.heart-btn svg{width:100%;height:100%;overflow:visible}
+.heart-btn .stroke{fill:none;stroke:url(#hg);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1;stroke-dashoffset:1;animation:draw 3.2s cubic-bezier(.6,.05,.2,1) .3s forwards;
+  filter:drop-shadow(0 0 7px rgba(255,122,156,.8))}
+.heart-btn .stroke2{fill:none;stroke:var(--gold);stroke-opacity:.35;stroke-width:1;
+  stroke-dasharray:1;stroke-dashoffset:1;animation:draw 3.6s ease .9s forwards}
+.heart-btn .fill{fill:url(#hf);opacity:0;animation:fillin 1.8s 2.8s both}
+.heart-btn .beat{transform-box:fill-box;transform-origin:50% 55%;animation:beat 1.9s ease-in-out 4.6s infinite}
+.heart-btn .spark{fill:var(--gold);transform-box:fill-box;transform-origin:center;animation:tw 2.6s ease-in-out infinite}
+.heart-btn .spark:nth-of-type(2){animation-delay:.7s}.heart-btn .spark:nth-of-type(3){animation-delay:1.4s}.heart-btn .spark:nth-of-type(4){animation-delay:2s}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fillin{to{opacity:.88}}
+@keyframes beat{0%,100%{transform:scale(1)}12%{transform:scale(1.06)}24%{transform:scale(1)}36%{transform:scale(1.04)}48%{transform:scale(1)}}
+@keyframes tw{0%,100%{opacity:.2;transform:scale(.6)}50%{opacity:1;transform:scale(1.2)}}
+.hint{display:block;text-align:center;margin-top:.4rem;font:400 .72rem/1 var(--ui);letter-spacing:.18em;text-transform:uppercase;color:var(--soft);opacity:.7}
+
+/* letter */
+.letter{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(2rem,6vw,5rem);align-items:start}
+.letter h2{font-size:clamp(2.6rem,7vw,4.4rem);color:var(--blush)}
+.letter .quote{margin:2rem 0 0;padding-top:1.4rem;border-top:1px solid var(--line)}
+.quote .deva{display:block;font-size:clamp(1.5rem,3.4vw,2rem);line-height:1.5}
+.quote small{display:block;margin-top:.4rem;font:400 .8rem/1.4 var(--ui);letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+.letter p{margin:0 0 1.4rem;max-width:36rem;font-size:clamp(1.15rem,2.4vw,1.35rem);line-height:1.75;color:var(--ink)}
+.letter p.big{font-style:italic;font-size:clamp(1.35rem,3vw,1.7rem);color:var(--blush);line-height:1.5}
+
+/* words */
+.words{text-align:center;padding-block:clamp(2.5rem,7vw,5rem)}
+.you{margin:0;font:300 .8rem/1 var(--ui);letter-spacing:.34em;text-transform:uppercase;color:var(--soft)}
+.word{margin:.4rem 0 0;font-family:var(--display);font-size:clamp(4rem,16vw,9rem);line-height:1.15;color:var(--rose);
+  text-shadow:0 0 40px rgba(255,122,156,.45);transition:opacity .55s ease,transform .55s ease,filter .55s ease}
+.word.out{opacity:0;transform:translateY(12px) scale(.96);filter:blur(6px)}
+
+/* timeline */
+.day-head{max-width:40rem;margin-bottom:clamp(2rem,5vw,3.5rem)}
+.day-head h2{font-size:clamp(2.6rem,7vw,4.4rem);color:var(--blush)}
+.day-head p{margin:1rem 0 0;color:var(--soft)}
+.day{list-style:none;margin:0;padding:0;max-width:46rem}
+.moment{position:relative;display:grid;grid-template-columns:5rem 1.5rem minmax(0,1fr);align-items:start;padding-bottom:2.8rem}
+.moment:last-child{padding-bottom:0}
+.moment:not(:last-child)::before,.moment:not(:last-child)::after{content:"";position:absolute;left:5.75rem;top:1rem;height:100%;width:2px;transform:translateX(-50%)}
+.moment::before{background:rgba(255,214,223,.15)}
+.moment::after{background:linear-gradient(var(--rose),var(--gold));box-shadow:0 0 10px rgba(255,122,156,.55);
+  transform:translateX(-50%) scaleY(0);transform-origin:top;transition:transform 1s ease}
+.moment.lit::after{transform:translateX(-50%) scaleY(1)}
+.when{text-align:right;padding-right:.9rem;font:500 .74rem/1.9rem var(--ui);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.dot{position:relative;z-index:1;justify-self:center;margin-top:.55rem;width:.9rem;height:.9rem;border-radius:50%;
+  background:var(--night);border:2px solid rgba(242,201,138,.55);transition:background .5s,box-shadow .5s,transform .5s,border-color .5s}
+.moment.lit .dot{background:var(--rose);border-color:var(--blush);transform:scale(1.25);box-shadow:0 0 0 5px rgba(255,122,156,.18),0 0 18px rgba(255,122,156,.85)}
+.what{padding-left:.9rem}
+.what h3{margin:0 0 .25rem;font:italic 400 clamp(1.4rem,3.4vw,1.8rem)/1.3 var(--body);color:var(--blush)}
+.what p{margin:0;color:var(--soft);max-width:34rem}
+
+/* vows */
+.vows h2{font-size:clamp(2.6rem,7vw,4.4rem);color:var(--blush);margin-bottom:clamp(1.6rem,4vw,2.6rem)}
+.vow-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:1rem}
+.vow{min-width:0;padding:1.5rem 1.4rem 1.6rem;background:rgba(255,255,255,.045);border:1px solid var(--line);border-radius:1.1rem;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:transform .4s ease,border-color .4s ease,background .4s ease}
+.vow:hover{transform:translateY(-4px);border-color:rgba(255,122,156,.5);background:rgba(255,122,156,.07)}
+.vow svg{width:22px;height:20px;fill:var(--rose);margin-bottom:.9rem;filter:drop-shadow(0 0 6px rgba(255,122,156,.7))}
+.vow p{margin:0;font-size:1.2rem;line-height:1.55}
+
+/* the question */
+.ask{text-align:center;position:relative;padding-bottom:clamp(4rem,10vw,7rem)}
+.ask::before{content:"";position:absolute;left:50%;top:44%;width:min(46rem,120%);aspect-ratio:1;transform:translate(-50%,-50%);
+  background:radial-gradient(closest-side,rgba(255,122,156,.2),transparent);animation:glow 5s ease-in-out infinite;pointer-events:none}
+@keyframes glow{0%,100%{opacity:.55;scale:.92}50%{opacity:1;scale:1.05}}
+.big{position:relative;font-size:clamp(3rem,10.5vw,6.4rem);margin:.4rem auto 1.2rem;max-width:14ch;
+  background:linear-gradient(100deg,#ffe3ea,var(--rose) 45%,var(--gold) 75%,#ffe3ea);background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 7s linear infinite;
+  filter:drop-shadow(0 0 28px rgba(255,122,156,.35));padding-bottom:.1em}
+@keyframes shimmer{to{background-position:-220% 0}}
+.ask-sub{position:relative;margin:0 0 2.4rem;color:var(--soft);font-size:1.25rem;font-style:italic}
+.choices{position:relative;display:flex;flex-wrap:wrap;gap:1rem;justify-content:center}
+.btn{min-height:56px;padding:0 2rem;font:500 .85rem/1 var(--ui);letter-spacing:.18em;text-transform:uppercase;border-radius:999px;cursor:pointer;
+  transition:transform .25s ease,box-shadow .25s ease,background .25s ease;max-width:100%}
+.btn:hover{transform:translateY(-2px) scale(1.03)}
+.btn.primary{position:relative;color:#fff;border:0;background:linear-gradient(120deg,#ff5c86,#c2305f);box-shadow:0 10px 34px rgba(255,92,134,.45)}
+.btn.primary::after{content:"";position:absolute;inset:0;border-radius:inherit;border:2px solid var(--rose);animation:ring 2.2s ease-out infinite}
+@keyframes ring{from{transform:scale(1);opacity:.8}to{transform:scale(1.35,1.6);opacity:0}}
+.btn.ghost{color:var(--blush);background:rgba(255,255,255,.04);border:1.5px solid rgba(255,217,226,.5)}
+.btn.ghost:hover{background:rgba(255,122,156,.14)}
+.answer{position:relative;max-width:34rem;margin:0 auto}
+.answer .script{font-size:clamp(3.2rem,11vw,5.6rem);color:var(--rose);animation:pop 1s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes pop{from{opacity:0;transform:scale(.7)}to{opacity:1;transform:none}}
+.answer p{margin:1rem 0 1.4rem;font-size:1.3rem;animation:fade 1.2s .5s both}
+.answer .deva{display:block;font-size:1.6rem;margin-bottom:1.6rem;animation:fade 1.2s .9s both}
+
+footer{text-align:center;padding-block:2rem clamp(3rem,8vw,5rem);position:relative}
+footer .script{font-size:clamp(2.4rem,7vw,3.6rem);color:var(--blush)}
+footer .deva{display:block;margin-top:.5rem;font-size:1.15rem}
+
+/* gentle scroll reveal: never fully hidden */
+@supports (animation-timeline:view()){
+  .rise{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 55%}
+  @keyframes rise{from{opacity:.3;transform:translateY(22px)}to{opacity:1;transform:none}}
+}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:minmax(0,1fr)}
+  .heart-btn{order:-1;width:min(78%,17rem)}
+  .letter{grid-template-columns:minmax(0,1fr)}
+  .music span.label{display:none}
+  .music{padding:0 .9rem}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .rise{animation:none!important}
+  .btn.primary::after{display:none}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="heart" viewBox="0 0 24 22"><path d="M12 21C4 14 1 9 3.5 5 5.5 2 10 2.5 12 6c2-3.500 6.500-4 8.500-1C23 9 20 14 12 21Z"/></symbol>
+</svg>
+
+<div class="sky" aria-hidden="true"></div>
+<div class="dawn" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<button class="music" id="music" type="button" aria-pressed="false" aria-label="Play soft music">
+  <span class="bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  <span class="label">Music</span>
+</button>
+
+<main>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">A letter, and a question</p>
+      <h1 class="title" aria-label="For my everything">
+        <span class="line" style="--d:.4s" aria-hidden="true">For my</span>
+        <span class="line" style="--d:1.2s" aria-hidden="true">everything</span>
+      </h1>
+      <p class="deva">तुम बिन मैं कुछ भी नहीं</p>
+      <p class="lede">I cannot live without you. Take a few minutes, my love. There are things I want you to know before I ask you something.</p>
+      <a class="cue" id="cue" href="#letter">Keep reading
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v15M5 13l7 7 7-7"/></svg>
+      </a>
+    </div>
+    <div>
+      <button class="heart-btn" id="heartBtn" type="button" aria-label="Tap the heart for a little love">
+        <svg viewBox="0 0 200 180" aria-hidden="true">
+          <defs>
+            <linearGradient id="hg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd9e2"/><stop offset=".5" stop-color="#ff7a9c"/><stop offset="1" stop-color="#f2c98a"/></linearGradient>
+            <radialGradient id="hf" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#ff9db5" stop-opacity=".55"/><stop offset="1" stop-color="#c2305f" stop-opacity=".25"/></radialGradient>
+          </defs>
+          <g class="beat">
+            <path class="fill" d="M100 165C20 105 5 55 40 30c25-18 52-5 60 18 8-23 35-36 60-18 35 25 20 75-60 135Z"/>
+            <path class="stroke2" pathLength="1" d="M100 150C34 100 22 58 50 38c20-14 42-4 50 16 8-20 30-30 50-16 28 20 16 62-50 112Z"/>
+            <path class="stroke" pathLength="1" d="M100 165C20 105 5 55 40 30c25-18 52-5 60 18 8-23 35-36 60-18 35 25 20 75-60 135Z"/>
+          </g>
+          <path class="spark" d="M22 18l2.500 7 7 2.500-7 2.500L22 37l-2.500-7-7-2.500 7-2.500z"/>
+          <path class="spark" d="M178 14l2 5.500 5.500 2-5.500 2-2 5.500-2-5.500-5.500-2 5.500-2z"/>
+          <path class="spark" d="M188 120l1.800 5 5 1.800-5 1.800-1.800 5-1.800-5-5-1.800 5-1.800z"/>
+          <path class="spark" d="M10 110l1.800 5 5 1.800-5 1.800-1.800 5-1.800-5-5-1.800 5-1.800z"/>
+        </svg>
+        <span class="hint">Tap the heart</span>
+      </button>
+    </div>
+  </header>
+
+  <section class="letter" id="letter">
+    <div class="rise">
+      <p class="eyebrow">Before I ask</p>
+      <h2 class="script">What you are to me</h2>
+      <div class="quote">
+        <span class="deva">तुम बिन जीना मुमकिन नहीं</span>
+        <small>I cannot live without you</small>
+      </div>
+    </div>
+    <div class="rise">
+      <p>Some people spend their whole lives looking for home. I found mine in you.</p>
+      <p>You are my first thought in the morning and my last one before I sleep. You are the laughter when my day is heavy and the quiet when everything is too loud. Every good part of me grew because you believed in it first.</p>
+      <p>I have tried to picture a life without you, and I can’t. There is no version of me that makes sense alone.</p>
+      <p class="big">You are not a part of my life. You are my whole life.</p>
+    </div>
+  </section>
+
+  <section class="words rise" aria-label="You are my everything">
+    <p class="you">You are my</p>
+    <p class="word" id="word">peace</p>
+  </section>
+
+  <section>
+    <div class="day-head rise">
+      <p class="eyebrow">From first light to forever</p>
+      <h2 class="script">I want every moment with you</h2>
+      <p>Not the big days only. All of them, from the minute your eyes open to the years we haven’t lived yet.</p>
+    </div>
+    <ol class="day" id="day">
+      <li class="moment">
+        <time class="when">5:30 AM</time><span class="dot" aria-hidden="true"></span>
+        <div class="what rise"><h3>The first light</h3><p>I want to wake up and find you there, sleepy and warm, before the world asks anything of us.</p></div>
+      </li>
+      <li class="moment">
+        <time class="when">9:00 AM</time><span class="dot" aria-hidden="true"></span>
+        <div class="what rise"><h3>Ordinary mornings</h3><p>Chai in your hands, mine going cold on the table, and nothing urgent to say. Just us.</p></div>
+      </li>
+      <li class="moment">
+        <time class="when">1:00 PM</time><span class="dot" aria-hidden="true"></span>
+        <div class="what rise"><h3>The middle of a busy day</h3><p>Call me with nothing to tell me. I will listen to all of it. Every day is lighter when I know you are somewhere in it.</p></div>
+      </li>
+      <li class="moment">
+        <time class="when">6:30 PM</time><span class="dot" aria-hidden="true"></span>
+        <div class="what rise"><h3>Golden hour</h3><p>Slow walks, long drives, and the songs we both pretend we don’t know the words to.</p></div>
+      </li>
+      <li class="moment">
+        <time class="when">11:00 PM</time><span class="dot" aria-hidden="true"></span>
+        <div class="what rise"><h3>Late at night</h3><p>Your head on my shoulder, the lights low, and every worry of yours mine to carry for a while.</p></div>
+      </li>
+      <li class="moment">
+        <time class="when">Always</time><span class="dot" aria-hidden="true"></span>
+        <div class="what rise"><h3>Every year after</h3><p>Grey hair, slower steps, the same hand in mine. I will still look at you like it is the first day.</p></div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="vows">
+    <h2 class="script rise">What I promise you</h2>
+    <div class="vow-grid">
+      <div class="vow rise"><svg aria-hidden="true"><use href="#heart"/></svg><p>I will choose you every morning, even on the hard days.</p></div>
+      <div class="vow rise"><svg aria-hidden="true"><use href="#heart"/></svg><p>I will hold your hand in the quiet and in the noise.</p></div>
+      <div class="vow rise"><svg aria-hidden="true"><use href="#heart"/></svg><p>I will make you laugh on the days you forget how.</p></div>
+      <div class="vow rise"><svg aria-hidden="true"><use href="#heart"/></svg><p>I will love you more tomorrow than I do today.</p></div>
+    </div>
+  </section>
+
+  <section class="ask" id="ask">
+    <p class="eyebrow" style="position:relative">So here is my question</p>
+    <h2 class="script big">Will you spend forever with me?</h2>
+    <p class="ask-sub">Again, and every day after this one.</p>
+    <div class="choices" id="choices">
+      <button class="btn primary" id="yes1" type="button">Yes, forever</button>
+      <button class="btn ghost" id="yes2" type="button">Yes, a thousand times</button>
+    </div>
+    <div class="answer" id="answer" hidden>
+      <h3 class="script">You said yes.</h3>
+      <p>Thank you for choosing me again. I will spend every day trying to deserve you.</p>
+      <span class="deva">मेरी जान, हमेशा के लिए</span>
+      <button class="btn ghost" id="again" type="button">Celebrate again</button>
+    </div>
+  </section>
+
+  <footer>
+    <p class="script">Yours, always.</p>
+    <span class="deva">हमेशा सिर्फ़ तुम्हारा</span>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement;
+  var c = document.getElementById('fx'), x = c.getContext('2d');
+  var W=0,H=0,stars=[],petals=[],bursts=[],raf=0,skyP=0;
+  var COLS=['255,122,156','255,170,190','240,110,150','255,205,215','242,201,138'];
+  function rnd(a,b){return a+Math.random()*(b-a)}
+
+  function mkPetal(init){
+    return {x:rnd(0,W),y:init?rnd(0,H):rnd(-40,-10),s:rnd(5,12),vy:rnd(.35,.95),sw:rnd(.6,1.6),
+      ph:rnd(0,6.28),rot:rnd(0,6.28),vr:rnd(-.02,.02),col:COLS[(Math.random()*COLS.length)|0],a:rnd(.35,.7)};
+  }
+  function build(){
+    var ns=Math.round(Math.min(170,W*H/9000)), np=Math.round(Math.min(55,Math.max(18,W/24)));
+    stars=[];petals=[];
+    for(var i=0;i<ns;i++)stars.push({x:rnd(0,W),y:rnd(0,H),r:rnd(.4,1.5),ph:rnd(0,6.28),sp:rnd(.4,1.4)});
+    for(var j=0;j<np;j++)petals.push(mkPetal(true));
+  }
+  function size(){
+    var d=Math.min(window.devicePixelRatio||1,2);
+    W=innerWidth;H=innerHeight;c.width=W*d;c.height=H*d;x.setTransform(d,0,0,d,0,0);build();
+    if(!raf)frame(performance.now());
+  }
+  function petalPath(s){
+    x.beginPath();x.moveTo(0,-s);
+    x.bezierCurveTo(s*.9,-s*.6,s*.7,s*.6,0,s);
+    x.bezierCurveTo(-s*.7,s*.6,-s*.9,-s*.6,0,-s);x.closePath();
+  }
+  function heartPath(s){
+    x.beginPath();x.moveTo(0,s*.9);
+    x.bezierCurveTo(-s*1.3,s*.1,-s*.9,-s*.9,0,-s*.35);
+    x.bezierCurveTo(s*.9,-s*.9,s*1.3,s*.1,0,s*.9);x.closePath();
+  }
+  function frame(t){
+    x.clearRect(0,0,W,H);
+    var sa=1-.75*skyP,i,p,s;
+    for(i=0;i<stars.length;i++){
+      s=stars[i];
+      var a=(.35+.65*(.5+.5*Math.sin(t*.001*s.sp+s.ph)))*sa;
+      x.fillStyle='rgba(255,236,220,'+a.toFixed(3)+')';
+      x.beginPath();x.arc(s.x,s.y,s.r,0,6.283);x.fill();
+    }
+    for(i=0;i<petals.length;i++){
+      p=petals[i];
+      if(!reduced){p.y+=p.vy;p.ph+=.012;p.x+=Math.sin(p.ph)*p.sw*.5;p.rot+=p.vr;
+        if(p.y>H+20||p.x<-30||p.x>W+30)petals[i]=p=mkPetal(false);}
+      x.save();x.translate(p.x,p.y);x.rotate(p.rot);
+      x.fillStyle='rgba('+p.col+','+p.a+')';petalPath(p.s);x.fill();x.restore();
+    }
+    for(i=bursts.length-1;i>=0;i--){
+      p=bursts[i];
+      p.vy+=.11;p.vx*=.985;p.vy*=.985;p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;p.life--;
+      if(p.life<=0){bursts.splice(i,1);continue}
+      x.save();x.translate(p.x,p.y);x.rotate(p.h?0:p.rot);
+      x.fillStyle='rgba('+p.col+','+Math.min(1,p.life/60).toFixed(2)+')';
+      if(p.h)heartPath(p.s);else petalPath(p.s);
+      x.fill();x.restore();
+    }
+    raf=(!reduced||bursts.length)&&!document.hidden?requestAnimationFrame(frame):0;
+  }
+  function wake(){if(!raf)raf=requestAnimationFrame(frame)}
+  function burst(ox,oy,n){
+    n=n||70;
+    for(var i=0;i<n;i++){
+      var a=rnd(0,6.283),sp=rnd(2,10);
+      bursts.push({x:ox,y:oy,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp-3,s:rnd(6,15),rot:rnd(0,6.28),vr:rnd(-.1,.1),
+        life:rnd(90,170),col:COLS[(Math.random()*COLS.length)|0],h:Math.random()<.55});
+    }
+    wake();
+  }
+  function celebrate(){
+    var k=0;
+    var iv=setInterval(function(){
+      burst(rnd(W*.15,W*.85),rnd(H*.15,H*.55),45);
+      if(++k>=7)clearInterval(iv);
+    },380);
+  }
+  addEventListener('resize',size);
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)wake()});
+  size();
+
+  /* scroll: night to dawn, timeline dots */
+  var moments=[].slice.call(document.querySelectorAll('.moment')),ticking=false;
+  function update(){
+    var max=root.scrollHeight-innerHeight,p=max>0?Math.min(1,Math.max(0,scrollY/max)):0;
+    skyP=p;root.style.setProperty('--p',p.toFixed(3));
+    moments.forEach(function(m){
+      var d=m.querySelector('.dot').getBoundingClientRect();
+      m.classList.toggle('lit',d.top+d.height/2<innerHeight*.66);
+    });
+    if(reduced&&!raf)frame(performance.now());
+  }
+  addEventListener('scroll',function(){
+    if(ticking)return;ticking=true;
+    requestAnimationFrame(function(){ticking=false;update()});
+  },{passive:true});
+  addEventListener('resize',update);
+  update();
+
+  document.getElementById('cue').addEventListener('click',function(e){
+    e.preventDefault();
+    var t=document.getElementById('letter');
+    if(t&&t.scrollIntoView)t.scrollIntoView({behavior:reduced?'auto':'smooth',block:'start'});
+  });
+
+  /* words */
+  var words=['peace','home','strength','laughter','prayer','best friend','everything'],wi=0,wEl=document.getElementById('word');
+  if(!reduced){
+    setInterval(function(){
+      wEl.classList.add('out');
+      setTimeout(function(){wi=(wi+1)%words.length;wEl.textContent=words[wi];wEl.classList.remove('out')},560);
+    },2600);
+  }
+
+  /* heart tap */
+  document.getElementById('heartBtn').addEventListener('click',function(){
+    var r=this.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height*.45,40);
+  });
+
+  /* the answer */
+  var choices=document.getElementById('choices'),answer=document.getElementById('answer');
+  function yes(e){
+    var r=e.currentTarget.getBoundingClientRect();
+    burst(r.left+r.width/2,r.top+r.height/2,90);
+    choices.hidden=true;answer.hidden=false;
+    celebrate();
+    setTimeout(function(){answer.scrollIntoView({behavior:reduced?'auto':'smooth',block:'center'})},200);
+  }
+  document.getElementById('yes1').addEventListener('click',yes);
+  document.getElementById('yes2').addEventListener('click',yes);
+  document.getElementById('again').addEventListener('click',function(){celebrate();burst(W/2,H*.4,90)});
+
+  /* soft music, only after a tap */
+  var ac,master,timer,playing=false,step=0,btn=document.getElementById('music');
+  var prog=[[261.63,329.63,392,493.88],[220,261.63,329.63,392],[174.61,220,261.63,329.63],[196,246.94,293.66,392]];
+  var pat=[0,1,2,3,2,1,2,3];
+  function note(f,dur,vol){
+    var o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime;
+    o.type='sine';o.frequency.value=f;
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+.04);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+    o.connect(g);g.connect(master);o.start(t);o.stop(t+dur+.1);
+  }
+  function tick(){
+    var ch=prog[Math.floor(step/8)%4],i=step%8;
+    note(ch[pat[i]]*2,2.4,.16);
+    if(i===0)note(ch[0]/2,3.2,.22);
+    if(i===4)note(ch[1],2.6,.1);
+    step++;
+  }
+  function start(){
+    ac=ac||new (window.AudioContext||window.webkitAudioContext)();
+    if(!master){
+      master=ac.createGain();master.gain.value=.5;
+      var dl=ac.createDelay(1),fb=ac.createGain(),lp=ac.createBiquadFilter();
+      dl.delayTime.value=.38;fb.gain.value=.38;lp.type='lowpass';lp.frequency.value=2400;
+      master.connect(ac.destination);master.connect(dl);dl.connect(lp);lp.connect(fb);fb.connect(dl);lp.connect(ac.destination);
+    }
+    if(ac.resume)ac.resume();
+    tick();timer=setInterval(tick,560);
+  }
+  btn.addEventListener('click',function(){
+    try{
+      playing=!playing;
+      if(playing)start();else{clearInterval(timer);}
+      btn.setAttribute('aria-pressed',playing?'true':'false');
+      btn.setAttribute('aria-label',playing?'Pause music':'Play soft music');
+    }catch(err){playing=false;btn.setAttribute('aria-pressed','false')}
+  });
+})();
+</script>
